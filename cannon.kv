@@ -1,0 +1,307 @@
+<MainMenuScreen>:
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/titlescreen.png'
+
+    Button:
+        text: ''
+        background_normal: 'assets/button_play_w.png'
+        background_down: 'assets/button_play_b.png'
+        size_hint: 0.3, 0.18
+        pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+        on_release: app.switch_to_gamemenu()
+
+    Button:
+        text: ''
+        background_normal: 'assets/button_hof_w.png'
+        background_down: 'assets/button_hof_b.png'
+        size_hint: 0.3, 0.18
+        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+        on_release: app.switch_to_hof()
+
+    Button:
+        text: ''
+        background_normal: 'assets/button_help_w.png'
+        background_down: 'assets/button_help_b.png'
+        size_hint: 0.3, 0.18
+        pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+        on_release: app.switch_to_help()
+
+<HallOfFameScreen>:
+    FloatLayout:
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/hof_background.png'
+        Label:
+            text: root.primo
+            valign: 'middle'
+            halign: 'center'
+            color: 1, 1, 1, 1
+            size_hint: 1, 0.25
+            font_size: 0.7 * self.height - dp(25)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+            font_name: 'assets/SuperMario256.ttf'
+        Label:
+            text: root.secondo
+            valign: 'middle'
+            halign: 'center'
+            color: 1, 1, 1, 1
+            size_hint: 1, 0.15
+            font_size: self.height - dp(15)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+            font_name: 'assets/SuperMario256.ttf'
+        Label:
+            text: root.terzo
+            valign: 'middle'
+            halign: 'center'
+            color: 1, 1, 1, 1
+            size_hint: 1, 0.125
+            font_size: self.height - dp(15)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            font_name: 'assets/SuperMario256.ttf'
+        Button:
+            text: "X"
+            size_hint: 0.05, 0.1
+            font_size: self.width - dp(25)
+            pos_hint: {'center_x': 0.95, 'center_y': 0.95}
+            color: 0, 0, 0, 1
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: 'assets/X_bg_up.png'
+            background_down: 'assets/X_bg_down.png'
+            on_release: app.switch_to_menu()
+
+<HelpScreen>:
+    FloatLayout:
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/help_scene.jpg'
+        Button:
+            text: "X"
+            size_hint: 0.05, 0.1
+            font_size: self.width - dp(25)
+            pos_hint: {'center_x': 0.95, 'center_y': 0.95}
+            color: 0, 0, 0, 1
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: 'assets/X_bg_up.png'
+            background_down: 'assets/X_bg_down.png'
+            on_release: app.switch_to_menu()
+
+<GameMenuScreen>:
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 100
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+        Button:
+            text: 'New Game'
+            font_size: 0.1 * self.width
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: "assets/X_bg_up.png"
+            on_release: app.new_game()
+
+        Button:
+            text: 'Load Game'
+            font_size: 0.1 * self.width
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: "assets/X_bg_up.png"
+            on_release: app.load_game()
+        Button:
+            text: "X"
+            size_hint: 0.1, 0.1
+            font_size: self.width - dp(25)
+            pos_hint: {'center_x': 0.95, 'center_y': 0.95}
+            color: 0, 0, 0, 1
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: 'assets/X_bg_up.png'
+            background_down: 'assets/X_bg_down.png'
+            on_release: app.switch_to_menu()
+
+<NewGameScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+        Label:
+            text: 'What is your name?'
+            font_size: 0.25 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+        TextInput:
+            id: input
+            hint_text: 'Profile Name'
+            multiline: False
+            size_hint_y: None
+            height: '100dp'
+            font_size: '72sp'
+        Button:
+            text: 'Click here to start!'
+            font_size: 0.25 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: "assets/X_bg_up.png"
+            on_release: app.init_new_game()
+
+<LoadGameScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/background.png'
+    ScrollView:
+        GridLayout:
+            id: profile_layout
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [100, 100, 100, 100]
+            spacing: 50
+
+<GameScreen>:
+    FloatLayout:
+        id: float
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+
+        # BoxLayout to contain the labels, positioned at the top-left corner
+        BoxLayout:
+            id: boxy
+            orientation: 'vertical'
+            size_hint: None, None
+            width: 200  # Adjust width as needed
+            height: 100  # Adjust height as needed
+            pos_hint: {'x': 0.01, 'top': 1}
+            padding: 10
+            spacing: 10
+
+            Label:
+                id: projectile_label
+                text: 'Bullet'
+                font_size: '20sp'
+                font_name: 'assets/SuperMario256.ttf'
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            Label:
+                id: shots_label
+                text: 'Shots: 0/0'
+                font_size: '20sp'
+                font_name: 'assets/SuperMario256.ttf'
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: self.texture_size[1]
+
+        Button:
+            id: velocity_button
+            pos: 20, 20
+            size_hint: 0.15, 0.133
+            disabled: True
+            background_disabled_normal: 'assets/velocity/1.png'
+
+    Scatter:
+        id: scatter
+        do_rotation: True
+        do_scale: False
+        do_translation: False
+        size_hint: None, None
+        size: 400, 100
+        pos_hint: {'center_y': 0.5}
+        x: -200
+        Button:
+            size_hint: None, None
+            size: 400, 100
+            disabled: True
+            background_disabled_normal: 'assets/cannonwide.png'
+
+    FloatLayout:
+        id: level_canvas
+        size_hint: None, None
+        size: self.size
+        pos: self.pos
+
+<GameWonScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 100
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+        Label:
+            id: score_label
+            text: ''
+            font_size: 0.2 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 100
+            Button:
+                text: 'Save and Quit'
+                font_size: 0.1 * self.width
+                font_name: 'assets/SuperMario256.ttf'
+                background_normal: "assets/X_bg_up.png"
+                on_release: app.save_and_quit()
+
+            Button:
+                text: 'Continue'
+                font_size: 0.1 * self.width
+                font_name: 'assets/SuperMario256.ttf'
+                background_normal: "assets/X_bg_up.png"
+                on_release: app.continue_playing()
+
+<GameLostScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 100
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+        Label:
+            text: 'You lost...'
+            font_size: 0.3 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+
+        Button:
+            text: 'Back to main menu'
+            font_size: 0.25 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: "assets/X_bg_up.png"
+            on_release: app.switch_to_menu()
+
+<EndScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 100
+        canvas:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'assets/background.png'
+        Label:
+            id: end_label
+            text: ''
+            font_size: 0.1 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+
+        Button:
+            text: 'Check hall of fame'
+            font_size: 0.25 * self.height
+            font_name: 'assets/SuperMario256.ttf'
+            background_normal: "assets/X_bg_up.png"
+            on_release: app.switch_to_hof()
